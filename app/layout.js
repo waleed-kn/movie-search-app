@@ -1,8 +1,9 @@
 import Link from "next/link";
+import ThemeToggle from "./components/ThemeToggle";
 import "./globals.css";
 
 export const metadata = {
-  title: "CineSearch",
+  title: "CineScope",
   description: "Search and explore popular movies",
 };
 
@@ -11,9 +12,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <nav>
-          <Link href="/">🎬 Cine<span>Search</span></Link>
+          <Link href="/">🎬 Movies<span>Vault</span></Link>
+          <ThemeToggle />
         </nav>
+
         {children}
+
+        <footer>
+          <p>Developed by <span>Waleed Khan</span></p>
+        </footer>
       </body>
     </html>
   );
