@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1>Popular Movies</h1>
+      <h1>Popular <span>Movies</span></h1>
       <Search movies={movies} />
     </main>
   );

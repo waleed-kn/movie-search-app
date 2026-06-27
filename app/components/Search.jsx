@@ -13,20 +13,24 @@ export default function Search({ movies }) {
 
     return (
         <div>
-            <input
-                type="text"
-                placeholder="Search movies..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
+            <div className="search-wrapper">
+                <input
+                    type="text"
+                    placeholder="Search movies..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+            </div>
 
-            <p>Results: {filtered.length}</p>
+            <p className="results-count">{filtered.length} movies found</p>
 
-            <div>
-                {filtered.length === 0 && <p>No movies found </p>}
+            <div className="movies-grid">
+                {filtered.length === 0 && (
+                    <p className="no-results">No movies found for "{query}"</p>
+                )}
 
                 {filtered.map((movie) => (
-                    <div key={movie.id}>
+                    <div className="movie-card" key={movie.id}>
                         {movie.poster_path && (
                             <Image
                                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -35,10 +39,12 @@ export default function Search({ movies }) {
                                 height={300}
                             />
                         )}
-                        <h2>{movie.title}</h2>
-                        <p>⭐ {movie.vote_average}</p>
-                        <p>📅 {movie.release_date}</p>
-                        <Link href={`/movies/${movie.id}`}>View Details →</Link>
+                        <div className="movie-card-body">
+                            <h2>{movie.title}</h2>
+                            <p className="rating">⭐ {movie.vote_average.toFixed(1)}</p>
+                            <p className="date">📅 {movie.release_date}</p>
+                            <Link href={`/movies/${movie.id}`}>View Details</Link>
+                        </div>
                     </div>
                 ))}
             </div>

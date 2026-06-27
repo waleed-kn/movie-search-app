@@ -2,8 +2,8 @@ import Link from "next/link";
 import "./globals.css";
 
 export const metadata = {
-  title: "Movie Search App",
-  description: "Search for Favourite Movies",
+  title: "CineSearch",
+  description: "Search and explore popular movies",
 };
 
 export default function RootLayout({ children }) {
@@ -11,12 +11,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <nav>
-          <Link href="/">Movie Search</Link>
-        </nav >
+          <Link href="/">🎬 Cine<span>Search</span></Link>
+        </nav>
         {children}
       </body>
-
     </html>
-
   );
 }
