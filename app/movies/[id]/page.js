@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export default async function MovieDetail({ params }) {
-    const { id } = await params; // For Next.js 15
+    const { id } = await params;
 
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`,
