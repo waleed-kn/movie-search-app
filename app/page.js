@@ -3,5 +3,11 @@ export default async function Home() {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`
   );
-  if (!res.ok) throw new err("Failed to fetch the data ")
+  const data = await res.json();
+  const movie = data.results;
+  return (
+    
+  )
+
+
 }
