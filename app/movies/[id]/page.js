@@ -1,42 +1,47 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function MovieDetail({ params }) {
     const { id } = await params;
 
     const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`,
-        {
-            cache: "no-store",
-        }
+        { cache: "no-store" }
     );
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch movie");
-    }
+    if (!res.ok) throw new Error("Failed to fetch movie");
 
     const movie = await res.json();
 
     return (
         <main>
-            {movie.poster_path && (
-                <Image
-                    src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                    alt={movie.title}
-                    width={300}
-                    height={450}
-                    priority
-                />
-            )}
+            <Link href="/" className="back-link">← Back to movies</Link>
 
-            <h1>{movie.title}</h1>
+            <div className="detail-wrapper">
+                {movie.poster_path && (
+                    <div className="detail-poster">
+                        <Image
+                            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                            alt={movie.title}
+                            width={300}
+                            height={450}
+                            priority
+                        />
+                    </div>
+                )}
 
-            <p>⭐ {movie.vote_average}</p>
+                <div className="detail-info">
+                    <h1>{movie.title}</h1>
 
-            <p>📅 {movie.release_date}</p>
+                    <div className="detail-meta">
+                        <span className="rating-badge">⭐ {movie.vote_average.toFixed(1)}</span>
+                        <span>📅 {movie.release_date}</span>
+                        <span>🕐 {movie.runtime} mins</span>
+                    </div>
 
-            <p>🕐 {movie.runtime} mins</p>
-
-            <p>{movie.overview}</p>
+                    <p className="detail-overview">{movie.overview}</p>
+                </div>
+            </div>
         </main>
     );
 }
