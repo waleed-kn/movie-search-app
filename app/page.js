@@ -6,7 +6,9 @@ export default async function Home() {
   const data = await res.json();
   const movie = data.results;
   return (
-    
+    <main>
+      <h1></h1>
+    </main>
   )
 
 
