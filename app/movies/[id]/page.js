@@ -4,12 +4,21 @@ import Link from "next/link";
 export default async function MovieDetail({ params }) {
     const { id } = await params;
 
+    if (!process.env.TMDB_API_KEY) {
+        throw new Error("TMDB_API_KEY environment variable is not set");
+    }
+
     const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_KEY}`,
-        { cache: "no-store" }
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}`,
+        {
+            cache: "no-store",
+            timeout: 10000
+        }
     );
 
-    if (!res.ok) throw new Error("Failed to fetch movie");
+    if (!res.ok) {
+        throw new Error(`Failed to fetch movie: ${res.status} ${res.statusText}`);
+    }
 
     const movie = await res.json();
 
